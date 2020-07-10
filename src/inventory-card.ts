@@ -12,7 +12,7 @@ import {
 
 import './editor';
 
-import { BoilerplateCardConfig } from './types';
+import { InventoryCardConfig } from './types';
 import { actionHandler } from './action-handler-directive';
 import { CARD_VERSION } from './const';
 
@@ -27,16 +27,16 @@ console.info(
 
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-  type: 'boilerplate-card',
-  name: 'Boilerplate Card',
+  type: 'inventory-card',
+  name: 'Inventory Card',
   description: 'A template custom card for you to create something awesome',
 });
 
 // TODO Name your custom element
-@customElement('boilerplate-card')
-export class BoilerplateCard extends LitElement {
+@customElement('inventory-card')
+export class InventoryCard extends LitElement {
   public static async getConfigElement(): Promise<LovelaceCardEditor> {
-    return document.createElement('boilerplate-card-editor') as LovelaceCardEditor;
+    return document.createElement('inventory-card-editor') as LovelaceCardEditor;
   }
 
   public static getStubConfig(): object {
@@ -45,9 +45,9 @@ export class BoilerplateCard extends LitElement {
 
   // TODO Add any properities that should cause your element to re-render here
   @property() public hass!: HomeAssistant;
-  @property() private _config!: BoilerplateCardConfig;
+  @property() private _config!: InventoryCardConfig;
 
-  public setConfig(config: BoilerplateCardConfig): void {
+  public setConfig(config: InventoryCardConfig): void {
     // TODO Check for required fields and that they are of the proper format
     if (!config || config.show_error) {
       throw new Error(localize('common.invalid_configuration'));
@@ -58,7 +58,7 @@ export class BoilerplateCard extends LitElement {
     }
 
     this._config = {
-      name: 'Boilerplate',
+      name: 'Inventory',
       ...config,
     };
   }
@@ -82,7 +82,7 @@ export class BoilerplateCard extends LitElement {
           hasDoubleClick: hasAction(this._config.double_tap_action),
         })}
         tabindex="0"
-        aria-label=${`Boilerplate: ${this._config.entity}`}
+        aria-label=${`Inventory: ${this._config.entity}`}
       ></ha-card>
     `;
   }
